@@ -5,8 +5,9 @@ The site is hosted on **GitHub Pages**, deployed automatically by
 
 Cost: free, including HTTPS on the custom domain.
 
-Everything published to the public lives in `site/`. Nothing outside that folder
-is served.
+The **repository root** is what gets published. `index.html` at the root is the
+home page, and `assets/` sits next to it. Upload files to the root of the repo
+and they are served as-is.
 
 ---
 
@@ -24,8 +25,14 @@ That's it — the workflow does the rest. The first deploy publishes to
 
 ### 2. Add the site files
 
-Put the real site into `site/`, replacing the placeholder `site/index.html`.
-The home page must be named `index.html`.
+The home page must be named `index.html` and live at the repository root.
+Anything it references — `assets/style.css`, `assets/script.js`,
+`assets/logo.png`, `assets/images/*` — must keep exactly the same folder
+structure relative to it, because the paths inside the HTML are relative.
+
+Uploading via the GitHub website (**Add file → Upload files**) preserves folder
+structure when you drag a folder in. Drag the `assets` folder itself, not the
+files inside it, or the structure flattens and every image 404s.
 
 Push to `main` and the workflow deploys it.
 
@@ -33,7 +40,8 @@ Push to `main` and the workflow deploys it.
 
 The domain is **thatchartisans.co.za**, registered with GoDaddy.
 
-**a. Tell GitHub the domain.** Already done — `site/CNAME` contains one line:
+**a. Tell GitHub the domain.** Already done — the `CNAME` file at the
+repository root contains one line:
 
 ```
 thatchartisans.co.za
@@ -154,8 +162,13 @@ aggressively, so use a hard refresh when checking.
 **The workflow fails with "Pages is not enabled".** Step 1 above hasn't been
 done.
 
-**The domain shows a 404.** `site/index.html` is missing, or `site/CNAME`
-doesn't match the domain in **Settings → Pages**.
+**The domain shows a 404.** `index.html` is missing from the repository root,
+or `CNAME` doesn't match the domain in **Settings → Pages**.
+
+**The page loads but has no styling and no images.** The `assets/` folder is
+missing or its structure was flattened on upload. Open the browser console
+(F12) and look at the Network tab for 404s — the failing paths tell you exactly
+which files to re-upload and where.
 
 **"Enforce HTTPS" is greyed out.** DNS hasn't propagated yet, or one of the
 records above is wrong. Re-check with `dig`.

@@ -27,11 +27,12 @@ jobs:
 
       - uses: actions/configure-pages@v5
 
-      # Everything served to the public lives in site/. Keeping it in its own
-      # folder means README, LICENSE and CI config are never published.
+      # Publishes the repository root, so index.html and assets/ sit exactly
+      # where they are uploaded. README, LICENSE and docs/ get published too;
+      # they hold nothing private and the repo is public already.
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: ./site
+          path: .
 
       - id: deployment
         uses: actions/deploy-pages@v4
