@@ -1,17 +1,18 @@
 # Gallery photos
 
-Put your photos in this folder with these exact names and they appear in the Gallery automatically:
+The gallery shows four photos from this folder. Replace them with your own
+photos using the same file names and they update automatically:
 
-| File        | Gallery tile    | Shape           |
-|-------------|-----------------|-----------------|
-| cut-1.jpg   | Bald Fade       | tall (portrait) |
-| cut-2.jpg   | Taper Fade      | square-ish      |
-| cut-3.jpg   | Mohawk          | square-ish      |
-| cut-4.jpg   | High Fade       | wide            |
-| cut-5.jpg   | Clean & Bold    | square-ish      |
-| cut-6.jpg   | Little Legends  | wide on desktop |
+| File        | Gallery tile  | Shape           |
+|-------------|---------------|-----------------|
+| cut-1.jpg   | Taper Fade    | tall (portrait) |
+| cut-2.jpg   | Mohawk        | square-ish      |
+| cut-3.jpg   | Clean & Bold  | square-ish      |
+| cut-4.jpg   | The Chair     | wide (landscape)|
 
-Photos are cropped to fill each tile, so keep the haircut near the centre.
-Resize to about 1200px on the longest side so the page loads fast on mobile data.
-Any tile without a photo shows a placeholder.
-To change a caption, edit the `<figcaption>` text in `index.html`.
+The current photos are placeholders for the template. Swap in photos of your own cuts before going live.
+
+- Photos are cropped to fill each tile, so keep the haircut near the centre.
+- Resize to about 1200–1400px on the longest side so the page loads fast on mobile data.
+- If a photo is missing, its tile shows a placeholder instead.
+- To change a caption, edit the `<figcaption>` text in `index.html`.
