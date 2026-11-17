@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Legend The Barber</title>
+<meta name="description" content="Legend The Barber — clean cuts, sharp fades and house calls. 57 Baba Street, Extension 4, Mfuleni. Call 081 796 7844.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0e0e0f;
+    --bg-2:#161617;
+    --card:#1c1c1e;
+    --line:#2b2b2e;
+    --text:#f3f1ec;
+    --muted:#a9a59c;
+    --gold:#d4a24c;
+    --gold-2:#f0c36d;
+    --red:#c8322f;
+    --blue:#2f5fc8;
+    --radius:14px;
+    --max:1120px;
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  html{scroll-behavior:smooth}
+  section[id],#find-us{scroll-margin-top:76px}
+  body{
+    margin:0;background:var(--bg);color:var(--text);
+    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
+  h1,h2,h3{font-family:"Bebas Neue",Impact,sans-serif;letter-spacing:.04em;font-weight:400;margin:0;line-height:1}
+  .eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:.2em;font-size:.78rem;font-weight:600}
+  .btn{
+    display:inline-flex;align-items:center;gap:.55rem;
+    padding:.9rem 1.4rem;border-radius:999px;font-weight:600;font-size:.95rem;
+    border:1px solid transparent;transition:transform .15s ease,background .2s ease,border-color .2s ease;
+    cursor:pointer;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn-gold{background:var(--gold);color:#141414}
+  .btn-gold:hover{background:var(--gold-2)}
+  .btn-ghost{border-color:var(--line);color:var(--text);background:rgba(255,255,255,.02)}
+  .btn-ghost:hover{border-color:var(--gold)}
+  .btn svg{width:18px;height:18px;flex:none}
+
+  /* Barber pole stripe */
+  .pole{
+    height:6px;
+    background:repeating-linear-gradient(-45deg,var(--red) 0 14px,#fff 14px 28px,var(--blue) 28px 42px,#fff 42px 56px);
+    background-size:80px 80px;animation:pole 3s linear infinite;
+  }
+  @keyframes pole{to{background-position:80px 0}}
+  @media (prefers-reduced-motion:reduce){.pole{animation:none}.btn:hover{transform:none}}
+
+  /* Nav */
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(14,14,15,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{display:flex;align-items:center;gap:.6rem}
+  .logo-mark{
+    width:38px;height:38px;border-radius:50%;border:2px solid var(--gold);
+    display:grid;place-items:center;font-family:"Bebas Neue";font-size:1.25rem;color:var(--gold);
+  }
+  .logo-text{font-family:"Bebas Neue";font-size:1.5rem;letter-spacing:.06em}
+  .logo-text span{color:var(--gold)}
+  .nav-links{display:flex;gap:1.6rem;font-size:.92rem;color:var(--muted)}
+  .nav-links a:hover{color:var(--text)}
+  .nav-cta{padding:.6rem 1rem;font-size:.85rem;white-space:nowrap}
+  .nav-cta .sr{display:none}
+  @media (max-width:520px){.nav-cta .sr{display:inline}}
+  @media (max-width:820px){.nav-links{display:none}}
+  @media (max-width:520px){.nav-cta .num{display:none}.logo-text{font-size:1.25rem;white-space:nowrap}}
+
+  /* Hero */
+  .hero{position:relative;overflow:hidden;padding:96px 0 80px;border-bottom:1px solid var(--line)}
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(600px 400px at 85% 20%,rgba(212,162,76,.18),transparent 60%),
+      radial-gradient(500px 300px at 10% 90%,rgba(200,50,47,.10),transparent 60%);
+    pointer-events:none;
+  }
+  .hero-grid{position:relative;display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center}
+  .hero h1{font-size:clamp(3.4rem,10vw,7.5rem);margin:.6rem 0 1rem}
+  .hero h1 em{font-style:normal;color:var(--gold);display:block}
+  .hero p.lead{color:var(--muted);font-size:1.1rem;max-width:520px;margin:0 0 2rem}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+  .hero-badge{
+    aspect-ratio:1;border-radius:50%;border:1px solid var(--line);
+    display:grid;place-items:center;position:relative;max-width:360px;margin-left:auto;width:100%;
+    background:radial-gradient(circle at 50% 40%,#232325,#121213 70%);
+  }
+  .hero-badge::after{content:"";position:absolute;inset:14px;border-radius:50%;border:1px dashed rgba(212,162,76,.45)}
+  .badge-inner{text-align:center;padding:24px}
+  .badge-inner svg{width:72px;height:72px;color:var(--gold);margin-bottom:8px}
+  .badge-inner .big{font-family:"Bebas Neue";font-size:3rem;line-height:1}
+  .badge-inner .small{color:var(--muted);font-size:.85rem;letter-spacing:.15em;text-transform:uppercase}
+  @media (max-width:820px){
+    .hero{padding:64px 0 56px}
+    .hero-grid{grid-template-columns:1fr}
+    .hero-badge{max-width:240px;margin:0 auto}
+  }
+
+  /* Quick info strip */
+  .strip{background:var(--bg-2);border-bottom:1px solid var(--line)}
+  .strip-grid{display:grid;grid-template-columns:repeat(3,1fr)}
+  .strip-item{display:flex;gap:14px;align-items:center;padding:22px 16px;border-right:1px solid var(--line)}
+  .strip-item:last-child{border-right:0}
+  .strip-item svg{width:24px;height:24px;color:var(--gold);flex:none}
+  .strip-item small{display:block;color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.14em}
+  .strip-item strong{font-weight:600}
+  @media (max-width:820px){
+    .strip-grid{grid-template-columns:1fr}
+    .strip-item{border-right:0;border-bottom:1px solid var(--line)}
+    .strip-item:last-child{border-bottom:0}
+  }
+
+  /* Sections */
+  section{padding:88px 0}
+  .section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:40px;flex-wrap:wrap}
+  .section-head h2{font-size:clamp(2.6rem,6vw,4rem);margin-top:.4rem}
+  .section-head p{color:var(--muted);max-width:420px;margin:0}
+  @media (max-width:820px){section{padding:64px 0}}
+
+  /* Price list */
+  .menu{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .menu-item{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px;display:flex;flex-direction:column;gap:10px;transition:border-color .2s ease;
+  }
+  .menu-item:hover{border-color:rgba(212,162,76,.55)}
+  .menu-row{display:flex;align-items:baseline;gap:12px}
+  .menu-row h3{font-size:1.8rem}
+  .dots{flex:1;border-bottom:2px dotted var(--line);transform:translateY(-6px)}
+  .price{font-family:"Bebas Neue";font-size:2rem;color:var(--gold)}
+  .menu-item p{margin:0;color:var(--muted);font-size:.93rem}
+  .addon{
+    display:inline-flex;align-items:center;gap:8px;align-self:flex-start;
+    font-size:.8rem;font-weight:600;padding:.35rem .75rem;border-radius:999px;
+    background:rgba(212,162,76,.1);color:var(--gold-2);border:1px solid rgba(212,162,76,.3);
+  }
+  .menu-item.kids{background:linear-gradient(120deg,#1f1a12,#1c1c1e 60%);border-color:rgba(212,162,76,.35)}
+  .tag{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#141414;background:var(--gold);padding:.25rem .6rem;border-radius:6px;font-weight:700;align-self:flex-start}
+  @media (max-width:820px){.menu{grid-template-columns:1fr}}
+
+  /* Gallery */
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:220px;gap:16px}
+  .g-item{
+    position:relative;margin:0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);
+    background:repeating-linear-gradient(-45deg,#1c1c1e 0 18px,#19191b 18px 36px);
+    display:grid;place-items:center;
+  }
+  .g-item.tall{grid-row:span 2}
+  .g-item.wide,.g-item.wide-desk{grid-column:span 2}
+  .g-ph{text-align:center;color:var(--muted);font-size:.85rem;padding:16px}
+  .g-ph svg{width:36px;height:36px;color:rgba(212,162,76,.5);display:block;margin:0 auto 8px}
+  .g-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+  .g-item button{position:absolute;inset:0;border:0;background:none;padding:0;cursor:zoom-in}
+  .g-item:hover img{transform:scale(1.04)}
+  .g-item figcaption{
+    position:absolute;left:0;right:0;bottom:0;padding:28px 16px 14px;
+    font-family:"Bebas Neue";font-size:1.4rem;letter-spacing:.05em;
+    background:linear-gradient(transparent,rgba(0,0,0,.8));pointer-events:none;
+  }
+  .g-more{margin-top:28px;text-align:center}
+  @media (max-width:820px){
+    .gallery{grid-template-columns:1fr 1fr;grid-auto-rows:170px;gap:10px}
+    .g-item.wide{grid-column:span 2}
+    .g-item.wide-desk{grid-column:auto}
+    .g-item figcaption{font-size:1.15rem;padding:20px 12px 10px}
+  }
+  @media (prefers-reduced-motion:reduce){.g-item img{transition:none}}
+  .lightbox{
+    position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.92);display:none;
+    align-items:center;justify-content:center;padding:16px;
+  }
+  .lightbox.open{display:flex}
+  .lightbox img{max-width:100%;max-height:85vh;border-radius:10px}
+  .lightbox p{position:absolute;bottom:20px;left:0;right:0;text-align:center;font-family:"Bebas Neue";font-size:1.5rem;letter-spacing:.05em;margin:0}
+  .lb-close{position:absolute;top:16px;right:16px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:1.4rem;cursor:pointer}
+
+  /* House calls */
+  .house{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .house-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .zone{
+    border:1px solid var(--line);border-radius:var(--radius);padding:32px;background:var(--card);position:relative;overflow:hidden;
+  }
+  .zone.feature{border-color:var(--gold)}
+  .zone .label{color:var(--muted);text-transform:uppercase;letter-spacing:.16em;font-size:.78rem;font-weight:600}
+  .zone .amount{font-family:"Bebas Neue";font-size:4.2rem;color:var(--gold);line-height:1;margin:.5rem 0}
+  .zone h3{font-size:1.9rem;margin-bottom:.4rem}
+  .zone p{color:var(--muted);margin:0}
+  .zone svg.bg{position:absolute;right:-20px;bottom:-20px;width:150px;height:150px;color:rgba(212,162,76,.07)}
+  .pay{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .pay-card{display:flex;gap:16px;align-items:flex-start;padding:24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--card)}
+  .pay-card .ico{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:rgba(212,162,76,.12);color:var(--gold);flex:none}
+  .pay-card .ico svg{width:24px;height:24px}
+  .pay-card h4{margin:0 0 4px;font-size:1.05rem}
+  .pay-card p{margin:0;color:var(--muted);font-size:.93rem}
+  .steps{display:flex;gap:6px;margin-top:10px}
+  .steps span{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--gold);display:grid;place-items:center;font-size:.75rem;color:var(--gold);font-weight:700}
+  .steps span.done{background:var(--gold);color:#141414}
+  @media (max-width:820px){.house-grid,.pay{grid-template-columns:1fr}}
+
+  /* Booking */
+  .book-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:start}
+  .book-info h2{font-size:clamp(2.6rem,6vw,4rem);margin:.4rem 0 1rem}
+  .book-info p{color:var(--muted)}
+  .contact-list{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:12px}
+  .contact-list a,.contact-list div{
+    display:flex;gap:14px;align-items:center;padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--card);
+  }
+  .contact-list a:hover{border-color:var(--gold)}
+  .contact-list svg{width:22px;height:22px;color:var(--gold);flex:none}
+  .contact-list small{display:block;color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.12em}
+  form{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px;display:grid;gap:16px}
+  form h3{font-size:2rem}
+  .field{display:grid;gap:6px}
+  .field label{font-size:.82rem;color:var(--muted);font-weight:500}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  input,select,textarea{
+    width:100%;font:inherit;color:var(--text);background:var(--bg);border:1px solid var(--line);
+    border-radius:10px;padding:.8rem .9rem;outline:none;transition:border-color .2s ease;
+  }
+  input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+  textarea{resize:vertical;min-height:84px}
+  .check{display:flex;gap:10px;align-items:center;font-size:.9rem;color:var(--muted)}
+  .check input{width:18px;height:18px;accent-color:var(--gold)}
+  .total{
+    display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-radius:10px;
+    background:rgba(212,162,76,.08);border:1px dashed rgba(212,162,76,.4);
+  }
+  .total span{color:var(--muted);font-size:.9rem}
+  .total strong{font-family:"Bebas Neue";font-size:2rem;color:var(--gold);letter-spacing:.04em}
+  .fine{font-size:.8rem;color:var(--muted);margin:0}
+  @media (max-width:820px){.book-grid{grid-template-columns:1fr}.row2{grid-template-columns:1fr}}
+
+  /* Map */
+  .map{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);margin-top:48px;height:320px;background:var(--card)}
+  .map iframe{width:100%;height:100%;border:0;filter:grayscale(1) invert(.9) contrast(.9)}
+
+  /* Footer */
+  footer{border-top:1px solid var(--line);padding:40px 0 100px;color:var(--muted);font-size:.9rem}
+  .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+  .socials{display:flex;gap:10px}
+  .socials a{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center}
+  .socials a:hover{border-color:var(--gold);color:var(--gold)}
+  .socials svg{width:18px;height:18px}
+
+  /* Floating call bar (mobile) */
+  .fab{
+    position:fixed;left:16px;right:16px;bottom:16px;z-index:60;display:none;gap:10px;
+  }
+  .fab a{flex:1;justify-content:center}
+  @media (max-width:820px){.fab{display:flex}footer{padding-bottom:110px}}
+</style>
+</head>
+<body>
+
+<!-- SVG icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3c-2.76 0-5 2.24-5 5v2H7v4h2v9h4v-9h3l1-4h-4V9c0-.55.45-1 1-1z"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.02c-.24.68-1.42 1.3-1.96 1.35-.5.05-1.13.07-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.8-4.17-4.94-4.36-.14-.19-1.18-1.57-1.18-3s.75-2.13 1.02-2.42c.26-.29.58-.36.77-.36h.55c.18 0 .42-.07.65.5.24.58.82 2 .89 2.15.07.14.12.31.02.5-.1.19-.14.31-.29.48l-.43.5c-.14.14-.29.3-.12.59.17.29.75 1.24 1.61 2 1.1.98 2.04 1.29 2.33 1.43.29.14.46.12.63-.07.17-.19.72-.84.92-1.13.19-.29.38-.24.65-.14.26.1 1.68.79 1.97.94.29.14.48.21.55.33.07.12.07.68-.17 1.33z"/></symbol>
+  <symbol id="i-scissors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88M14.47 14.48 20 20M8.12 8.12 12 12"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></symbol>
+  <symbol id="i-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14l-1.5-6.5A2 2 0 0 0 15.55 9h-7.1a2 2 0 0 0-1.95 1.5z"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/><path d="M3 17h2M19 17h2"/></symbol>
+  <symbol id="i-cash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+</svg>
+
+<div class="pole" aria-hidden="true"></div>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="logo" aria-label="Legend The Barber home">
+      <span class="logo-mark">L</span>
+      <span class="logo-text">Legend <span>The Barber</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#prices">Prices</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#house-calls">House Calls</a>
+      <a href="#book">Book</a>
+      <a href="#find-us">Find Us</a>
+    </nav>
+    <a class="btn btn-gold nav-cta" href="tel:+27817967844">
+      <svg><use href="#i-phone"/></svg><span class="num">081 796 7844</span><span class="sr">Call</span>
+    </a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Mfuleni · Extension 4</div>
+        <h1>Legend <em>The Barber</em></h1>
+        <p class="lead">Clean lines, sharp fades and fresh cuts at prices that make sense. Pull up to the chair, or let us come to you with our house call service.</p>
+        <div class="hero-actions">
+          <a class="btn btn-gold" href="#book"><svg><use href="#i-cal"/></svg>Book a cut</a>
+          <a class="btn btn-ghost" href="#prices"><svg><use href="#i-scissors"/></svg>View prices</a>
+        </div>
+      </div>
+      <div class="hero-badge" aria-hidden="true">
+        <div class="badge-inner">
+          <svg><use href="#i-scissors"/></svg>
+          <div class="small">Cuts from</div>
+          <div class="big">R30</div>
+          <div class="small">Kids under 10 · R40</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK INFO -->
+  <div class="strip">
+    <div class="wrap strip-grid">
+      <a class="strip-item" href="tel:+27817967844">
+        <svg><use href="#i-phone"/></svg>
+        <div><small>Call or WhatsApp</small><strong>081 796 7844</strong></div>
+      </a>
+      <a class="strip-item" href="#find-us">
+        <svg><use href="#i-pin"/></svg>
+        <div><small>Visit us</small><strong>57 Baba Street, Extension 4</strong></div>
+      </a>
+      <a class="strip-item" href="https://www.facebook.com/landeloamahle" target="_blank" rel="noopener">
+        <svg><use href="#i-fb"/></svg>
+        <div><small>Facebook</small><strong>landeloamahle</strong></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- PRICES -->
+  <section id="prices">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">The Menu</div>
+          <h2>Cuts &amp; Prices</h2>
+        </div>
+        <p>Every cut finished with care. Ask about adding a black dye to make your line-up pop.</p>
+      </div>
+
+      <div class="menu">
+        <article class="menu-item">
+          <div class="menu-row"><h3>Clean &amp; Bold</h3><span class="dots"></span><span class="price">R30</span></div>
+          <p>A smooth, clean shave-down. Simple, sharp and always fresh.</p>
+        </article>
+
+        <article class="menu-item">
+          <div class="menu-row"><h3>Bald Fade</h3><span class="dots"></span><span class="price">R40</span></div>
+          <p>Skin-tight blend from the bottom up for a crisp, seamless finish.</p>
+          <span class="addon">+ Black dye · R10</span>
+        </article>
+
+        <article class="menu-item">
+          <div class="menu-row"><h3>Taper Fade</h3><span class="dots"></span><span class="price">R60</span></div>
+          <p>Gradual taper around the sides and neckline. Clean and classic.</p>
+          <span class="addon">+ Optional black dye · R10</span>
+        </article>
+
+        <article class="menu-item">
+          <div class="menu-row"><h3>Mohawk</h3><span class="dots"></span><span class="price">R60</span></div>
+          <p>Bold strip on top with faded sides. Make a statement.</p>
+        </article>
+
+        <article class="menu-item">
+          <div class="menu-row"><h3>High / Mid Fade</h3><span class="dots"></span><span class="price">R50</span></div>
+          <p>Choose where your fade starts, high or mid, blended to perfection.</p>
+        </article>
+
+        <article class="menu-item kids">
+          <span class="tag">Little Legends</span>
+          <div class="menu-row"><h3>Children Under 10</h3><span class="dots"></span><span class="price">R40</span></div>
+          <p>All haircuts, one price, for kids below the age of 10.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Fresh from the chair</div>
+          <h2>Gallery</h2>
+        </div>
+        <p>A few of our latest cuts. Tap a photo to see it bigger.</p>
+      </div>
+      <div class="gallery" id="galleryGrid">
+        <figure class="g-item tall">
+          <div class="g-ph"><svg><use href="#i-scissors"/></svg>Add photo: images/cut-1.jpg</div>
+          <img src="images/cut-1.jpg" alt="Side profile of a taper fade with sharp line-up" loading="lazy" onerror="this.remove()">
+          <figcaption>Taper Fade</figcaption>
+        </figure>
+        <figure class="g-item">
+          <div class="g-ph"><svg><use href="#i-scissors"/></svg>Add photo: images/cut-2.jpg</div>
+          <img src="images/cut-2.jpg" alt="Barber shaping a curly mohawk with a faded side" loading="lazy" style="object-position:center 70%" onerror="this.remove()">
+          <figcaption>Mohawk</figcaption>
+        </figure>
+        <figure class="g-item">
+          <div class="g-ph"><svg><use href="#i-scissors"/></svg>Add photo: images/cut-3.jpg</div>
+          <img src="images/cut-3.jpg" alt="Back of a short, clean cut with a neat neckline" loading="lazy" style="object-position:center 35%" onerror="this.remove()">
+          <figcaption>Clean &amp; Bold</figcaption>
+        </figure>
+        <figure class="g-item wide">
+          <div class="g-ph"><svg><use href="#i-scissors"/></svg>Add photo: images/cut-4.jpg</div>
+          <img src="images/cut-4.jpg" alt="Classic barber chair beside a hand-painted barbershop sign" loading="lazy" style="object-position:center 20%" onerror="this.remove()">
+          <figcaption>The Chair</figcaption>
+        </figure>
+      </div>
+      <div class="g-more">
+        <a class="btn btn-ghost" href="https://www.facebook.com/landeloamahle" target="_blank" rel="noopener"><svg><use href="#i-fb"/></svg>See more on Facebook</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOUSE CALLS -->
+  <section id="house-calls" class="house">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">We come to you</div>
+          <h2>House Calls</h2>
+        </div>
+        <p>Can't make it to the shop? Book a house call and get the same legendary cut at home, at work or at your event.</p>
+      </div>
+
+      <div class="house-grid">
+        <div class="zone feature">
+          <div class="label">Zone 1</div>
+          <div class="amount">R250</div>
+          <h3>Within Mfuleni</h3>
+          <p>Anywhere in Mfuleni. We bring the chair, the clippers and the vibe.</p>
+          <svg class="bg"><use href="#i-home"/></svg>
+        </div>
+        <div class="zone">
+          <div class="label">Zone 2</div>
+          <div class="amount">R350</div>
+          <h3>Outside Mfuleni</h3>
+          <p>Outside Mfuleni, within a 20&nbsp;km radius of 57 Baba Street, Extension 4.</p>
+          <svg class="bg"><use href="#i-car"/></svg>
+        </div>
+      </div>
+
+      <div class="pay">
+        <div class="pay-card">
+          <div class="ico"><svg><use href="#i-cash"/></svg></div>
+          <div>
+            <h4>Cash payments</h4>
+            <p>Pay cash on the day of your house call.</p>
+          </div>
+        </div>
+        <div class="pay-card">
+          <div class="ico"><svg><use href="#i-cal"/></svg></div>
+          <div>
+            <h4>Monthly payment plan</h4>
+            <p>Become eligible for monthly payments after 3 haircuts with us.</p>
+            <div class="steps" aria-label="3 haircuts to qualify">
+              <span class="done">1</span><span class="done">2</span><span class="done">3</span><span>✓</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section id="book">
+    <div class="wrap book-grid">
+      <div class="book-info">
+        <div class="eyebrow">Get in the chair</div>
+        <h2>Book Your Cut</h2>
+        <p>Fill in the form and it opens WhatsApp with your booking ready to send. Or just call, we're happy to help.</p>
+        <ul class="contact-list">
+          <li><a href="tel:+27817967844"><svg><use href="#i-phone"/></svg><span><small>Call</small>081 796 7844</span></a></li>
+          <li><a href="https://wa.me/27817967844" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg><span><small>WhatsApp</small>081 796 7844</span></a></li>
+          <li><a href="https://www.facebook.com/landeloamahle" target="_blank" rel="noopener"><svg><use href="#i-fb"/></svg><span><small>Facebook</small>landeloamahle</span></a></li>
+          <li><div id="find-us"><svg><use href="#i-pin"/></svg><span><small>Location</small>57 Baba Street, Extension 4, Mfuleni</span></div></li>
+        </ul>
+      </div>
+
+      <form id="bookForm" novalidate>
+        <h3>Booking request</h3>
+        <div class="row2">
+          <div class="field">
+            <label for="name">Your name</label>
+            <input id="name" name="name" required placeholder="e.g. Sipho">
+          </div>
+          <div class="field">
+            <label for="date">Preferred date</label>
+            <input id="date" name="date" type="date">
+          </div>
+        </div>
+        <div class="field">
+          <label for="cut">Haircut</label>
+          <select id="cut" name="cut">
+            <option value="Clean &amp; Bold|30">Clean &amp; Bold · R30</option>
+            <option value="Bald Fade|40|dye">Bald Fade · R40</option>
+            <option value="Taper Fade|60|dye">Taper Fade · R60</option>
+            <option value="Mohawk|60">Mohawk · R60</option>
+            <option value="High / Mid Fade|50">High / Mid Fade · R50</option>
+            <option value="Kids cut (under 10)|40">Kids cut (under 10) · R40</option>
+          </select>
+        </div>
+        <label class="check" id="dyeWrap"><input type="checkbox" id="dye"> Add black dye (+R10)</label>
+        <div class="field">
+          <label for="where">Where</label>
+          <select id="where" name="where">
+            <option value="At the shop|0">At the shop (57 Baba Street)</option>
+            <option value="House call within Mfuleni|250">House call · within Mfuleni (+R250)</option>
+            <option value="House call outside Mfuleni (within 20 km)|350">House call · outside Mfuleni, within 20 km (+R350)</option>
+          </select>
+        </div>
+        <div class="field" id="addrWrap" hidden>
+          <label for="addr">House call address</label>
+          <textarea id="addr" placeholder="Street, area, landmark"></textarea>
+        </div>
+        <div class="total"><span>Estimated total</span><strong id="total">R30</strong></div>
+        <button class="btn btn-gold" type="submit" style="justify-content:center">
+          <svg><use href="#i-wa"/></svg>Send booking on WhatsApp
+        </button>
+        <p class="fine">House calls: cash payment. Monthly payment option available after 3 haircuts with us.</p>
+      </form>
+    </div>
+
+    <div class="wrap">
+      <div class="map">
+        <iframe title="Map to Legend The Barber" loading="lazy"
+          src="https://maps.google.com/maps?q=57%20Baba%20Street%2C%20Mfuleni%2C%20Cape%20Town&z=15&output=embed"></iframe>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <div class="logo" style="margin-bottom:8px">
+        <span class="logo-mark">L</span>
+        <span class="logo-text" style="color:var(--text)">Legend <span>The Barber</span></span>
+      </div>
+      57 Baba Street, Extension 4, Mfuleni · 081 796 7844<br>
+      © <span id="yr"></span> Legend The Barber. All rights reserved.
+    </div>
+    <div class="socials">
+      <a href="tel:+27817967844" aria-label="Call"><svg><use href="#i-phone"/></svg></a>
+      <a href="https://wa.me/27817967844" target="_blank" rel="noopener" aria-label="WhatsApp"><svg><use href="#i-wa"/></svg></a>
+      <a href="https://www.facebook.com/landeloamahle" target="_blank" rel="noopener" aria-label="Facebook"><svg><use href="#i-fb"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lb-close" id="lbClose" aria-label="Close">&times;</button>
+  <img id="lbImg" alt="">
+  <p id="lbCap"></p>
+</div>
+
+<div class="fab">
+  <a class="btn btn-gold" href="tel:+27817967844"><svg><use href="#i-phone"/></svg>Call</a>
+  <a class="btn btn-ghost" style="background:var(--card)" href="https://wa.me/27817967844" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>WhatsApp</a>
+</div>
+
+<script>
+  (function(){
+    var $ = function(id){return document.getElementById(id)};
+    var cut=$('cut'), dye=$('dye'), dyeWrap=$('dyeWrap'), where=$('where'), addrWrap=$('addrWrap'), total=$('total');
+    $('yr').textContent = new Date().getFullYear();
+
+    function parts(sel){ return sel.value.split('|'); }
+    function update(){
+      var c = parts(cut), w = parts(where);
+      var canDye = c[2] === 'dye';
+      dyeWrap.style.display = canDye ? 'flex' : 'none';
+      if(!canDye) dye.checked = false;
+      addrWrap.hidden = w[1] === '0';
+      var sum = Number(c[1]) + (dye.checked ? 10 : 0) + Number(w[1]);
+      total.textContent = 'R' + sum;
+      return {cut:c[0], where:w[0], sum:sum};
+    }
+    [cut,dye,where].forEach(function(el){ el.addEventListener('change', update); });
+    update();
+
+    // Gallery lightbox: only photos that actually loaded become clickable
+    var lb=$('lightbox'), lbImg=$('lbImg'), lbCap=$('lbCap');
+    function openLb(img, cap){ lbImg.src=img.src; lbImg.alt=img.alt; lbCap.textContent=cap; lb.classList.add('open'); $('lbClose').focus(); }
+    function closeLb(){ lb.classList.remove('open'); lbImg.removeAttribute('src'); }
+    document.querySelectorAll('.g-item img').forEach(function(img){
+      function ready(){
+        var fig=img.parentNode; if(!fig || fig.querySelector('button')) return;
+        var b=document.createElement('button'); b.type='button';
+        b.setAttribute('aria-label','View '+img.alt);
+        b.addEventListener('click',function(){ openLb(img, fig.querySelector('figcaption').textContent); });
+        fig.appendChild(b);
+      }
+      if(img.complete && img.naturalWidth) ready(); else img.addEventListener('load', ready);
+    });
+    $('lbClose').addEventListener('click', closeLb);
+    lb.addEventListener('click', function(e){ if(e.target===lb) closeLb(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLb(); });
+
+    $('bookForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      var s = update();
+      var name = $('name').value.trim();
+      if(!name){ $('name').focus(); return; }
+      var lines = [
+        'Hi Legend The Barber, I would like to book:',
+        'Name: ' + name,
+        'Cut: ' + s.cut + (dye.checked ? ' + black dye' : ''),
+        'Where: ' + s.where
+      ];
+      if(!addrWrap.hidden && $('addr').value.trim()) lines.push('Address: ' + $('addr').value.trim());
+      if($('date').value) lines.push('Date: ' + $('date').value);
+      lines.push('Estimated total: R' + s.sum);
+      window.open('https://wa.me/27817967844?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
+    });
+  })();
+</script>
+</body>
+</html>
