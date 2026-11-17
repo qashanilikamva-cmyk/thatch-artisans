@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Legend The Barber</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Legend The Barber — fades, tapers, mohawks and kids' cuts at 57 Baba Street, Extension 4, Mfuleni. House calls available.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Archivo:wght@400;500;600;800&family=DM+Mono:wght@500&display=swap">
+<style>
+/* Layout: a hand-painted shopfront sign. Navy sign band up top, a painted price board,
+   a house-call band, then a booking slip that builds a WhatsApp message. */
+:root {
+  --paper: #F4F5F1;
+  --card: #FFFFFF;
+  --ink: #15204B;
+  --ink-soft: #4B5478;
+  --line: #D6DAE6;
+  --band: #15204B;
+  --on-band: #F4F5F1;
+  --on-band-soft: #B9C0DD;
+  --red: #C42129;
+  --mustard: #E6A71E;
+  --on-mustard: #15204B;
+  --pole-white: #FFFFFF;
+  --font-sign: "Bungee", "Arial Black", Impact, sans-serif;
+  --font-body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, Menlo, monospace;
+  --wrap: 1120px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0D1330; --card: #151D44; --ink: #EDEFF7; --ink-soft: #A9B0CE; --line: #2A3364;
+    --band: #19235A; --on-band: #F4F5F1; --on-band-soft: #B9C0DD;
+    --red: #EA4A50; --mustard: #F2B83A; --on-mustard: #15204B; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0D1330; --card: #151D44; --ink: #EDEFF7; --ink-soft: #A9B0CE; --line: #2A3364;
+  --band: #19235A; --on-band: #F4F5F1; --on-band-soft: #B9C0DD;
+  --red: #EA4A50; --mustard: #F2B83A; --on-mustard: #15204B; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+img { max-width: 100%; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body { background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: 17px; line-height: 1.55; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--band); }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--mustard); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: var(--wrap); margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--font-sign); font-weight: 400; line-height: 1; margin: 0; text-wrap: balance; letter-spacing: .01em; }
+h2 { font-size: clamp(30px, 5vw, 46px); }
+p { margin: 0; }
+.eyebrow { font-family: var(--font-mono); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--red); }
+.section { padding-block: clamp(56px, 8vw, 96px); }
+.section-head { display: grid; gap: 12px; margin-bottom: 36px; max-width: 640px; }
+.section-head p { color: var(--ink-soft); }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; gap: 10px; font: 800 16px/1 var(--font-body); text-decoration: none; padding: 15px 22px; border-radius: 6px; border: 2px solid transparent; cursor: pointer; transition: transform .15s ease, background .15s ease; }
+.btn:hover { transform: translateY(-2px); }
+.btn-red { background: var(--red); color: #fff; }
+.btn-mustard { background: var(--mustard); color: var(--on-mustard); }
+.btn-ghost { border-color: currentColor; background: transparent; }
+.btn svg { width: 18px; height: 18px; flex: none; }
+
+/* Header */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--band); color: var(--on-band); border-bottom: 4px solid var(--red); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+.logo { font-family: var(--font-sign); font-size: 20px; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+.logo .mini-pole { width: 12px; height: 28px; border-radius: 6px; }
+.nav { display: flex; gap: 22px; font-weight: 600; font-size: 15px; }
+.nav a { text-decoration: none; opacity: .85; }
+.nav a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 4px; }
+.top .btn { padding: 10px 16px; font-size: 14px; }
+@media (max-width: 820px) { .nav { display: none; } }
+
+/* Barber pole stripes */
+.pole { background: repeating-linear-gradient(-45deg, var(--red) 0 12px, var(--pole-white) 12px 24px, var(--band) 24px 36px, var(--pole-white) 36px 48px); background-size: 68px 68px; animation: spin 2.4s linear infinite; }
+@keyframes spin { to { background-position: 0 68px; } }
+@media (prefers-reduced-motion: reduce) { .pole { animation: none; } html { scroll-behavior: auto; } .btn { transition: none; } }
+
+/* Hero */
+.hero { background: var(--band); color: var(--on-band); position: relative; overflow: hidden; }
+.hero .wrap { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; padding-block: clamp(48px, 8vw, 96px); }
+.hero .eyebrow { color: var(--mustard); }
+.hero h1 { font-size: clamp(54px, 12vw, 136px); line-height: .9; margin-block: 18px 22px; }
+.hero h1 span { display: block; }
+.hero h1 .the { font-size: .38em; color: var(--mustard); margin-block: .12em; letter-spacing: .08em; }
+.hero .lede { max-width: 34ch; font-size: clamp(17px, 2vw, 20px); color: var(--on-band-soft); }
+.hero .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.hero-pole { width: 54px; height: min(380px, 52vw); border-radius: 27px; border: 5px solid var(--on-band); box-shadow: 0 -14px 0 -4px var(--mustard), 0 14px 0 -4px var(--mustard); }
+.from-badge { position: absolute; right: max(24px, calc((100vw - var(--wrap)) / 2 + 110px)); bottom: 40px; width: 128px; height: 128px; border-radius: 50%; background: var(--mustard); color: var(--on-mustard); display: grid; place-content: center; text-align: center; transform: rotate(-10deg); font-family: var(--font-sign); line-height: 1; }
+.from-badge small { font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; }
+.from-badge b { font-size: 40px; font-weight: 400; }
+@media (max-width: 700px) {
+  .hero .wrap { grid-template-columns: 1fr; }
+  .hero-pole { display: none; }
+  .from-badge { position: static; margin-top: 8px; width: 108px; height: 108px; }
+  .from-badge b { font-size: 32px; }
+}
+
+/* Price board */
+.board-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 860px) { .board-grid { grid-template-columns: 1fr; } }
+.board { background: var(--card); border: 4px solid var(--ink); border-radius: 10px; padding: clamp(20px, 4vw, 36px); box-shadow: 8px 8px 0 var(--red); }
+.board h3 { font-size: 22px; display: flex; justify-content: space-between; gap: 12px; padding-bottom: 14px; border-bottom: 4px solid var(--ink); margin-bottom: 6px; }
+.board h3 .eyebrow { align-self: end; }
+.row { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 10px; padding-block: 16px; border-bottom: 1px dashed var(--line); }
+.row:last-child { border-bottom: 0; }
+.row .name { font-weight: 800; font-size: clamp(18px, 2.4vw, 22px); }
+.row .dots { border-bottom: 3px dotted var(--ink-soft); opacity: .45; transform: translateY(-5px); }
+.row .price { font-family: var(--font-sign); font-size: clamp(22px, 3vw, 30px); color: var(--red); font-variant-numeric: tabular-nums; }
+.row .addon { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; margin-top: -2px; }
+.chip { font-family: var(--font-mono); font-size: 13px; padding: 4px 10px; border-radius: 999px; border: 1.5px solid var(--ink-soft); color: var(--ink-soft); }
+.side { display: grid; gap: 20px; }
+.kids { background: var(--mustard); color: var(--on-mustard); border-radius: 10px; padding: 28px; display: grid; gap: 8px; }
+.kids .big { font-family: var(--font-sign); font-size: clamp(44px, 7vw, 64px); line-height: 1; }
+.kids p { font-weight: 600; }
+.note { border: 2px solid var(--line); border-radius: 10px; padding: 22px; display: grid; gap: 8px; color: var(--ink-soft); }
+.note strong { color: var(--ink); }
+
+/* House calls */
+.calls { background: var(--band); color: var(--on-band); position: relative; }
+.calls .pole-edge { height: 14px; }
+.calls .section-head p { color: var(--on-band-soft); }
+.calls .eyebrow { color: var(--mustard); }
+.zones { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+@media (max-width: 640px) { .zones { grid-template-columns: 1fr; } }
+.zone { border: 2px solid var(--on-band-soft); border-radius: 10px; padding: 26px; display: grid; gap: 10px; }
+.zone .price { font-family: var(--font-sign); font-size: clamp(44px, 7vw, 60px); color: var(--mustard); line-height: 1; }
+.zone .where { font-weight: 800; font-size: 19px; }
+.zone p { color: var(--on-band-soft); }
+.radius { display: flex; align-items: center; gap: 18px; margin-top: 8px; }
+.radius svg { width: 64px; height: 64px; flex: none; }
+.pay { margin-top: 40px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+@media (max-width: 640px) { .pay { grid-template-columns: 1fr; } }
+.pay-card { background: var(--on-band); color: #15204B; border-radius: 10px; padding: 26px; display: grid; gap: 10px; align-content: start; }
+.pay-card h3 { font-size: 22px; }
+.pay-card p { color: #4B5478; }
+.ticks { display: flex; align-items: center; gap: 10px; margin-top: 6px; font-family: var(--font-mono); font-size: 13px; color: #4B5478; }
+.ticks i { width: 34px; height: 34px; border-radius: 50%; border: 2px solid #15204B; display: grid; place-content: center; font-style: normal; font-family: var(--font-sign); font-size: 15px; color: #15204B; }
+.ticks i.on { background: #C42129; border-color: #C42129; color: #fff; }
+.ticks .arrow { flex: 1; min-width: 18px; border-top: 2px dashed #4B5478; }
+
+/* Booking */
+.book-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 860px) { .book-grid { grid-template-columns: 1fr; } }
+form { display: grid; gap: 18px; background: var(--card); border: 2px solid var(--line); border-radius: 10px; padding: clamp(20px, 4vw, 32px); }
+.field { display: grid; gap: 6px; }
+.field label, .field legend { font-weight: 700; font-size: 15px; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 520px) { .two { grid-template-columns: 1fr; } }
+input[type="text"], input[type="tel"], input[type="date"], select, textarea { font: 500 16px var(--font-body); color: var(--ink); background: var(--paper); border: 2px solid var(--line); border-radius: 6px; padding: 12px 14px; width: 100%; }
+input:focus, select:focus, textarea:focus { border-color: var(--ink); outline: none; }
+fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 8px; }
+.options { display: flex; flex-wrap: wrap; gap: 10px; }
+.opt { position: relative; }
+.opt input { position: absolute; opacity: 0; inset: 0; }
+.opt span { display: block; padding: 10px 14px; border: 2px solid var(--line); border-radius: 6px; font-weight: 600; font-size: 15px; cursor: pointer; }
+.opt input:checked + span { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+.opt input:focus-visible + span { outline: 3px solid var(--mustard); outline-offset: 2px; }
+.opt input:disabled + span { opacity: .4; cursor: not-allowed; }
+.check { display: flex; gap: 10px; align-items: center; font-weight: 600; }
+.check input { width: 20px; height: 20px; accent-color: var(--red); }
+.hint { font-size: 14px; color: var(--ink-soft); }
+
+.slip { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 88px); background: var(--card); border: 4px solid var(--ink); border-radius: 10px; overflow: hidden; }
+.slip .pole { height: 12px; }
+.slip-body { padding: 24px; display: grid; gap: 16px; }
+.slip h3 { font-size: 22px; }
+.lines { display: grid; gap: 8px; font-family: var(--font-mono); font-size: 15px; }
+.lines div { display: flex; justify-content: space-between; gap: 12px; }
+.lines div span:last-child { font-variant-numeric: tabular-nums; }
+.total { display: flex; justify-content: space-between; align-items: baseline; border-top: 3px solid var(--ink); padding-top: 12px; }
+.total b { font-family: var(--font-sign); font-weight: 400; font-size: 36px; color: var(--red); font-variant-numeric: tabular-nums; }
+.slip .btn { justify-content: center; width: 100%; }
+.copy-row { display: flex; gap: 10px; align-items: center; justify-content: space-between; flex-wrap: wrap; font-size: 15px; }
+.copy-row .num { font-family: var(--font-mono); font-size: 17px; user-select: all; }
+.copy-btn { font: 700 14px var(--font-body); background: none; border: 2px solid var(--ink); color: var(--ink); border-radius: 6px; padding: 7px 12px; cursor: pointer; }
+
+/* Visit */
+.visit-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+@media (max-width: 820px) { .visit-grid { grid-template-columns: 1fr; } }
+.visit { border-top: 4px solid var(--ink); padding-top: 18px; display: grid; gap: 8px; align-content: start; }
+.visit .label { font-family: var(--font-mono); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+.visit .val { font-size: 22px; font-weight: 800; line-height: 1.25; overflow-wrap: anywhere; }
+.visit a.more { font-weight: 700; color: var(--red); text-underline-offset: 4px; }
+
+/* Gallery: each tile shows the photo in images/ if present, else a striped placeholder */
+.gallery { display: grid; grid-template-columns: 1.2fr 1fr 1fr; grid-template-rows: repeat(2, minmax(180px, 26vw)); gap: 14px; }
+.shot { position: relative; border-radius: 10px; overflow: hidden; background-color: var(--card); background-image: repeating-linear-gradient(-45deg, transparent 0 18px, var(--line) 18px 20px); background-size: cover; background-position: center; border: 2px solid var(--line); }
+.shot:nth-child(1) { grid-row: span 2; background-image: url("images/cut-taper-beard.jpg"), repeating-linear-gradient(-45deg, transparent 0 18px, var(--line) 18px 20px); }
+.shot:nth-child(2) { background-image: url("images/cut-low.jpg"), repeating-linear-gradient(-45deg, transparent 0 18px, var(--line) 18px 20px); }
+.shot:nth-child(3) { grid-row: span 2; background-image: url("images/in-the-chair.jpg"), repeating-linear-gradient(-45deg, transparent 0 18px, var(--line) 18px 20px); }
+.shot:nth-child(4) { background-image: url("images/the-shop.jpg"), repeating-linear-gradient(-45deg, transparent 0 18px, var(--line) 18px 20px); }
+.shot figcaption { position: absolute; left: 10px; bottom: 10px; background: var(--band); color: var(--on-band); font: 600 13px var(--font-mono); letter-spacing: .06em; padding: 6px 10px; border-radius: 4px; }
+@media (max-width: 700px) {
+  .gallery { grid-template-columns: 1fr 1fr; grid-template-rows: none; grid-auto-rows: 200px; }
+  .shot:nth-child(1), .shot:nth-child(3) { grid-row: span 2; }
+}
+
+footer { background: var(--band); color: var(--on-band-soft); }
+footer .wrap { padding-block: 28px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-size: 14px; }
+footer .logo { color: var(--on-band); font-size: 16px; }
+</style>
+</head>
+<body style="margin:0">
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="mini-pole pole" aria-hidden="true"></span>LEGEND</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#prices">Prices</a>
+      <a href="#work">The work</a>
+      <a href="#house-calls">House calls</a>
+      <a href="#book">Book</a>
+      <a href="#visit">Find us</a>
+    </nav>
+    <a class="btn btn-mustard" href="tel:+27817967844">Call 081 796 7844</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">57 Baba Street · Extension 4 · Mfuleni</p>
+        <h1><span>Legend</span><span class="the">The</span><span>Barber</span></h1>
+        <p class="lede">Clean lines, sharp fades and a proper finish. Walk in at the shop or book Legend to come to you.</p>
+        <div class="actions">
+          <a class="btn btn-red" href="#book">Book a cut</a>
+          <a class="btn btn-ghost" href="#prices">See prices</a>
+        </div>
+      </div>
+      <div class="hero-pole pole" aria-hidden="true"></div>
+    </div>
+    <div class="from-badge" aria-label="Cuts from R30"><small>CUTS FROM</small><b>R30</b></div>
+  </section>
+
+  <section class="section" id="prices">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">The price board</p>
+        <h2>Cuts &amp; prices</h2>
+        <p>Every cut finished clean. Black dye can be added to a bald fade or taper fade.</p>
+      </div>
+      <div class="board-grid">
+        <div class="board">
+          <h3>Haircuts <span class="eyebrow">Rand</span></h3>
+          <div class="row"><span class="name">Clean &amp; Bold</span><span class="dots"></span><span class="price">R30</span></div>
+          <div class="row"><span class="name">Bald Fade</span><span class="dots"></span><span class="price">R40</span>
+            <div class="addon"><span class="chip">+ Black dye R10</span></div></div>
+          <div class="row"><span class="name">High / Mid Fade</span><span class="dots"></span><span class="price">R50</span></div>
+          <div class="row"><span class="name">Taper Fade</span><span class="dots"></span><span class="price">R60</span>
+            <div class="addon"><span class="chip">Optional black dye + R10</span></div></div>
+          <div class="row"><span class="name">Mohawk</span><span class="dots"></span><span class="price">R60</span></div>
+        </div>
+        <div class="side">
+          <div class="kids">
+            <p class="eyebrow" style="color: inherit">Kids under 10</p>
+            <span class="big">R40</span>
+            <p>Any haircut on the board, one price for children below age 10.</p>
+          </div>
+          <div class="note">
+            <strong>Want Legend at your door?</strong>
+            <p>House calls run across Mfuleni and up to 20 km from the shop. Prices below.</p>
+            <a class="more" href="#house-calls" style="color: var(--red); font-weight: 700">House call prices →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="work" style="padding-top: 0">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">The work</p>
+        <h2>Fresh from the chair</h2>
+        <p>More cuts every week on Facebook at landeloamahle.</p>
+      </div>
+      <div class="gallery">
+        <figure class="shot" style="margin:0" role="img" aria-label="Taper fade with a shaped beard"><figcaption>Taper fade + beard</figcaption></figure>
+        <figure class="shot" style="margin:0" role="img" aria-label="Clean low cut, back view"><figcaption>Clean low cut</figcaption></figure>
+        <figure class="shot" style="margin:0" role="img" aria-label="Legend at work, shaping a fade"><figcaption>In the chair</figcaption></figure>
+        <figure class="shot" style="margin:0" role="img" aria-label="The barber chair at the shop"><figcaption>The shop</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="calls" id="house-calls">
+    <div class="pole pole-edge" aria-hidden="true"></div>
+    <div class="wrap section">
+      <div class="section-head">
+        <p class="eyebrow">House calls</p>
+        <h2>We come to you</h2>
+        <p>Home, work or an event. Legend brings the clippers and the chair-side finish.</p>
+      </div>
+      <div class="zones">
+        <div class="zone">
+          <span class="where">Within Mfuleni</span>
+          <span class="price">R250</span>
+          <p>Anywhere inside Mfuleni.</p>
+        </div>
+        <div class="zone">
+          <span class="where">Outside Mfuleni</span>
+          <span class="price">R350</span>
+          <div class="radius">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <circle cx="32" cy="32" r="29" fill="none" stroke="var(--on-band-soft)" stroke-width="2" stroke-dasharray="4 4"></circle>
+              <line x1="32" y1="32" x2="58" y2="20" stroke="var(--mustard)" stroke-width="2"></line>
+              <circle cx="32" cy="32" r="5" fill="var(--red)"></circle>
+            </svg>
+            <p>Up to 20 km from 57 Baba Street, Extension 4.</p>
+          </div>
+        </div>
+      </div>
+      <div class="pay">
+        <div class="pay-card">
+          <p class="eyebrow">Payment</p>
+          <h3>Cash</h3>
+          <p>Pay cash on the day of your house call.</p>
+        </div>
+        <div class="pay-card">
+          <p class="eyebrow">For regulars</p>
+          <h3>Monthly payment</h3>
+          <p>Once you've had 3 haircuts with us, you can switch your house calls to a monthly payment.</p>
+          <div class="ticks" aria-label="Three haircuts unlock monthly payment">
+            <i class="on">1</i><i class="on">2</i><i class="on">3</i><span class="arrow"></span><span>MONTHLY</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="book">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Book</p>
+        <h2>Book your cut</h2>
+        <p>Pick your cut, see the price, then send the booking to Legend on WhatsApp.</p>
+      </div>
+      <div class="book-grid">
+        <form id="booking" novalidate>
+          <div class="two">
+            <div class="field"><label for="b-name">Your name</label><input id="b-name" type="text" autocomplete="name" placeholder="e.g. Sipho"></div>
+            <div class="field"><label for="b-date">Preferred day</label><input id="b-date" type="date"></div>
+          </div>
+          <div class="field">
+            <label for="b-cut">Haircut</label>
+            <select id="b-cut">
+              <option value="clean">Clean &amp; Bold · R30</option>
+              <option value="bald">Bald Fade · R40</option>
+              <option value="highmid">High / Mid Fade · R50</option>
+              <option value="taper" selected>Taper Fade · R60</option>
+              <option value="mohawk">Mohawk · R60</option>
+            </select>
+          </div>
+          <label class="check"><input id="b-dye" type="checkbox"> Add black dye (+R10)</label>
+          <label class="check"><input id="b-kid" type="checkbox"> Haircut is for a child under 10 (R40)</label>
+          <fieldset>
+            <legend>Where?</legend>
+            <div class="options">
+              <label class="opt"><input type="radio" name="where" id="w-shop" value="shop" checked><span>At the shop</span></label>
+              <label class="opt"><input type="radio" name="where" id="w-in" value="in"><span>House call · Mfuleni</span></label>
+              <label class="opt"><input type="radio" name="where" id="w-out" value="out"><span>House call · outside, up to 20 km</span></label>
+            </div>
+          </fieldset>
+          <div class="field" id="addr-field" hidden><label for="b-addr">Address for the house call</label><input id="b-addr" type="text" autocomplete="street-address" placeholder="Street, area"></div>
+          <fieldset id="pay-field" hidden>
+            <legend>Payment</legend>
+            <div class="options">
+              <label class="opt"><input type="radio" name="pay" id="p-cash" value="Cash" checked><span>Cash</span></label>
+              <label class="opt"><input type="radio" name="pay" id="p-month" value="Monthly"><span>Monthly (3+ cuts with us)</span></label>
+            </div>
+          </fieldset>
+          <p class="hint" id="dye-hint">Black dye is available with a bald fade or taper fade.</p>
+        </form>
+
+        <aside class="slip" aria-live="polite">
+          <div class="pole" aria-hidden="true"></div>
+          <div class="slip-body">
+            <h3>Your booking</h3>
+            <div class="lines" id="lines"></div>
+            <div class="total"><span>Estimated total</span><b id="total">R60</b></div>
+            <a class="btn btn-red" id="wa" href="https://wa.me/27817967844" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3a.5.5 0 0 0 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.7-1.2 2.2 2.2 0 0 0 .2-1.2c-.1-.1-.3-.2-.5-.3Z"/></svg>
+              Send booking on WhatsApp
+            </a>
+            <div class="copy-row">
+              <span>Or call: <span class="num" id="num">081 796 7844</span></span>
+              <button class="copy-btn" type="button" id="copy">Copy number</button>
+            </div>
+            <p class="hint">Prices are a guide. Legend confirms your time and final price.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="visit" style="padding-top: 0">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Find us</p>
+        <h2>Visit the shop</h2>
+      </div>
+      <div class="visit-grid">
+        <div class="visit">
+          <span class="label">Address</span>
+          <span class="val">57 Baba Street<br>Extension 4, Mfuleni</span>
+          <a class="more" href="https://www.google.com/maps/search/?api=1&amp;query=57+Baba+Street+Extension+4+Mfuleni" target="_blank" rel="noopener">Open in Google Maps →</a>
+        </div>
+        <div class="visit">
+          <span class="label">Phone &amp; WhatsApp</span>
+          <span class="val">081 796 7844</span>
+          <a class="more" href="tel:+27817967844">Call now →</a>
+        </div>
+        <div class="visit">
+          <span class="label">Facebook</span>
+          <span class="val">landeloamahle</span>
+          <a class="more" href="https://www.facebook.com/landeloamahle" target="_blank" rel="noopener">See our latest cuts →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="logo">LEGEND THE BARBER</span>
+    <span>57 Baba Street, Extension 4, Mfuleni · 081 796 7844</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var CUTS = {
+    clean:   { name: "Clean & Bold",    price: 30, dye: false },
+    bald:    { name: "Bald Fade",       price: 40, dye: true },
+    highmid: { name: "High / Mid Fade", price: 50, dye: false },
+    taper:   { name: "Taper Fade",      price: 60, dye: true },
+    mohawk:  { name: "Mohawk",          price: 60, dye: false }
+  };
+  var CALLS = { shop: 0, in: 250, out: 350 };
+  var KIDS = 40, DYE = 10, PHONE = "27817967844";
+  var $ = function (id) { return document.getElementById(id); };
+
+  function where() { return document.querySelector('input[name="where"]:checked').value; }
+  function pay() { return document.querySelector('input[name="pay"]:checked').value; }
+
+  function update() {
+    var cut = CUTS[$("b-cut").value];
+    var dye = $("b-dye");
+    dye.disabled = !cut.dye;
+    if (!cut.dye) dye.checked = false;
+    $("dye-hint").hidden = cut.dye;
+
+    var kid = $("b-kid").checked;
+    var w = where();
+    var lines = [[cut.name + (kid ? " (child under 10)" : ""), kid ? KIDS : cut.price]];
+    if (dye.checked) lines.push(["Black dye", DYE]);
+    if (w !== "shop") lines.push([w === "in" ? "House call, Mfuleni" : "House call, up to 20 km", CALLS[w]]);
+    $("addr-field").hidden = w === "shop";
+    $("pay-field").hidden = w === "shop";
+
+    var total = 0;
+    $("lines").innerHTML = "";
+    lines.forEach(function (l) {
+      total += l[1];
+      var d = document.createElement("div");
+      var a = document.createElement("span"); a.textContent = l[0];
+      var b = document.createElement("span"); b.textContent = "R" + l[1];
+      d.appendChild(a); d.appendChild(b); $("lines").appendChild(d);
+    });
+    $("total").textContent = "R" + total;
+
+    var msg = ["Hi Legend, I'd like to book a cut."];
+    var name = $("b-name").value.trim();
+    if (name) msg.push("Name: " + name);
+    lines.forEach(function (l) { msg.push(l[0] + ": R" + l[1]); });
+    msg.push("Estimated total: R" + total);
+    if ($("b-date").value) msg.push("Preferred day: " + $("b-date").value);
+    if (w === "shop") msg.push("At the shop, 57 Baba Street");
+    else {
+      var addr = $("b-addr").value.trim();
+      if (addr) msg.push("Address: " + addr);
+      msg.push("Payment: " + pay());
+    }
+    $("wa").href = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(msg.join("\n"));
+  }
+
+  $("booking").addEventListener("input", update);
+  $("booking").addEventListener("change", update);
+  $("booking").addEventListener("submit", function (e) { e.preventDefault(); });
+
+  $("copy").addEventListener("click", function () {
+    var btn = this;
+    function done() { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy number"; }, 1800); }
+    function fallback() {
+      var r = document.createRange(); r.selectNodeContents($("num"));
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      btn.textContent = "Selected";
+    }
+    try { navigator.clipboard.writeText("0817967844").then(done, fallback); } catch (e) { fallback(); }
+  });
+
+  update();
+})();
+</script>
+</body>
+</html>
